@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+        <h1>Products Information </h1>
+        <div id="container"> </div>
+    <script>
+
+
+      let products =[]
+      function productInfo(){
+         axios.get("http://localhost:8000/products").then((res)=>{
+            products = [...res.data];
+            createTable(products)
+         })
+      }
+      productInfo()
+
+    
+       function createTable(products){
+         products.forEach((product)=>{
+            let box = document.createElement('div')
+            box.style.border = "1px solid red";
+            box.style.backgroundColor="lightblue";
+            box.style.margin="20px 0px";
+            let pName = document.createElement('p')
+            pName.innerHTML = product.name
+            let pType = document.createElement('p')
+            pType.innerHTML = product.type
+            box.append(pName)
+            box.append(pType)
+
+            document.getElementById("container").append(box)
+         })
+       }
+       
+    
+
+
+    </script>
+
+</body>
+</html>
